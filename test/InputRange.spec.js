@@ -35,6 +35,7 @@ describe('InputRange', () => {
         slider: 'InputRange-slider',
         sliderContainer: 'InputRange-sliderContainer',
         trackActive: 'InputRange-track InputRange-track--active',
+        trackAfter: 'InputRange-track InputRange-track--after',
         trackContainer: 'InputRange-track InputRange-track--container',
       });
     });

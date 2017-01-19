@@ -27,9 +27,11 @@ declare namespace ReactInputRange {
       slider?: string;
       sliderContainer?: string;
       trackActive?: string;
+      trackAfter?: string;
       trackContainer?: string;
     };
 
+    afterTrack?: boolean;
     ariaLabelledby?: string;
     ariaControls?: string;
     defaultValue?: number;

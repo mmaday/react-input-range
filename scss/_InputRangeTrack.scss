@@ -23,3 +23,8 @@
 .InputRange-track--active {
   background: $InputRange-track--active-background;
 }
+.InputRange-track--after {
+  background: $InputRange-track--after-background;
+  margin-top: -$InputRange-track-height;
+  position: absolute;
+}

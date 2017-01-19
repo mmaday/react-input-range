@@ -574,7 +574,8 @@ export default class InputRange extends React.Component {
           classNames={ classNames }
           ref="track"
           percentages={ percentages }
-          onTrackMouseDown={ this.handleTrackMouseDown }>
+          onTrackMouseDown={ this.handleTrackMouseDown }
+          after={ this.props.afterTrack }>
 
           { renderSliders(this) }
         </Track>
@@ -612,6 +613,7 @@ export default class InputRange extends React.Component {
  * @property {Function} value
  */
 InputRange.propTypes = {
+  afterTrack: React.PropTypes.bool,
   ariaLabelledby: React.PropTypes.string,
   ariaControls: React.PropTypes.string,
   classNames: React.PropTypes.objectOf(React.PropTypes.string),
@@ -643,6 +645,7 @@ InputRange.propTypes = {
  * @property {Range|number} value
  */
 InputRange.defaultProps = {
+  afterTrack: false,
   classNames: defaultClassNames,
   defaultValue: 0,
   disabled: false,

@@ -468,7 +468,8 @@ var InputRange = (function (_React$Component) {
             classNames: classNames,
             ref: 'track',
             percentages: percentages,
-            onTrackMouseDown: this.handleTrackMouseDown },
+            onTrackMouseDown: this.handleTrackMouseDown,
+            after: this.props.afterTrack },
           renderSliders(this)
         ),
         _react2['default'].createElement(
@@ -511,6 +512,7 @@ var InputRange = (function (_React$Component) {
 exports['default'] = InputRange;
 
 InputRange.propTypes = {
+  afterTrack: _react2['default'].PropTypes.bool,
   ariaLabelledby: _react2['default'].PropTypes.string,
   ariaControls: _react2['default'].PropTypes.string,
   classNames: _react2['default'].PropTypes.objectOf(_react2['default'].PropTypes.string),
@@ -529,6 +531,7 @@ InputRange.propTypes = {
 };
 
 InputRange.defaultProps = {
+  afterTrack: false,
   classNames: _defaultClassNames2['default'],
   defaultValue: 0,
   disabled: false,
@@ -816,6 +819,20 @@ function getActiveTrackStyle(track) {
   return activeTrackStyle;
 }
 
+function getAfterTrackStyle(track) {
+  var props = track.props;
+
+  var width = (1 - props.percentages.max) * 100 + '%';
+  var left = props.percentages.max * 100 + '%';
+
+  var afterTrackStyle = {
+    left: left,
+    width: width
+  };
+
+  return afterTrackStyle;
+}
+
 var Track = (function (_React$Component) {
   _inherits(Track, _React$Component);
 
@@ -854,6 +871,7 @@ var Track = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var activeTrackStyle = getActiveTrackStyle(this);
+      var afterTrackStyle = this.props.after && getAfterTrackStyle(this);
       var classNames = this.props.classNames;
 
       return _react2['default'].createElement(
@@ -866,6 +884,9 @@ var Track = (function (_React$Component) {
         _react2['default'].createElement('div', {
           style: activeTrackStyle,
           className: classNames.trackActive }),
+        this.props.after && _react2['default'].createElement('div', {
+          style: afterTrackStyle,
+          className: classNames.trackAfter }),
         this.props.children
       );
     }
@@ -886,6 +907,7 @@ var Track = (function (_React$Component) {
 exports['default'] = Track;
 
 Track.propTypes = {
+  after: _react2['default'].PropTypes.bool,
   children: _react2['default'].PropTypes.node,
   classNames: _react2['default'].PropTypes.objectOf(_react2['default'].PropTypes.string),
   onTrackMouseDown: _react2['default'].PropTypes.func.isRequired,
@@ -909,6 +931,7 @@ exports['default'] = {
   slider: 'InputRange-slider',
   sliderContainer: 'InputRange-sliderContainer',
   trackActive: 'InputRange-track InputRange-track--active',
+  trackAfter: 'InputRange-track InputRange-track--after',
   trackContainer: 'InputRange-track InputRange-track--container'
 };
 module.exports = exports['default'];

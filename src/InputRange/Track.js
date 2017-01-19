@@ -25,6 +25,25 @@ function getActiveTrackStyle(track) {
 }
 
 /**
+ * Get the CSS styles for an after track
+ * @private
+ * @param {Track} track React component
+ * @return {Object} CSS styles
+ */
+function getAfterTrackStyle(track) {
+  const { props } = track;
+  const width = `${(1 - props.percentages.max) * 100}%`;
+  const left = `${props.percentages.max * 100}%`;
+
+  const afterTrackStyle = {
+    left,
+    width,
+  };
+
+  return afterTrackStyle;
+}
+
+/**
  * Track React component
  * @class
  * @extends React.Component
@@ -83,6 +102,7 @@ export default class Track extends React.Component {
    */
   render() {
     const activeTrackStyle = getActiveTrackStyle(this);
+    const afterTrackStyle = this.props.after && getAfterTrackStyle(this);
     const classNames = this.props.classNames;
 
     return (
@@ -95,6 +115,12 @@ export default class Track extends React.Component {
           style={ activeTrackStyle }
           className={ classNames.trackActive }>
         </div>
+        { this.props.after &&
+          <div
+            style={ afterTrackStyle }
+            className={ classNames.trackAfter }>
+          </div>
+        }
         { this.props.children }
       </div>
     );
@@ -110,6 +136,7 @@ export default class Track extends React.Component {
  * @property {Function} percentages
  */
 Track.propTypes = {
+  after: React.PropTypes.bool,
   children: React.PropTypes.node,
   classNames: React.PropTypes.objectOf(React.PropTypes.string),
   onTrackMouseDown: React.PropTypes.func.isRequired,
